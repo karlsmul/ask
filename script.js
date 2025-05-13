@@ -53,6 +53,45 @@ function getRandomQuestion() {
     return questions[randomIndex];
 }
 
+// Sprachsynthese (Text-to-Speech)
+const voiceSelect = document.getElementById('voiceSelect');
+const speakButton = document.getElementById('speakButton');
+let voices = [];
+let currentQuestion = questionDisplay.textContent;
+
+function populateVoiceList() {
+    voices = window.speechSynthesis.getVoices();
+    // Nur deutsche Stimmen
+    const germanVoices = voices.filter(v => v.lang.startsWith('de'));
+    voiceSelect.innerHTML = '';
+    if (germanVoices.length === 0) {
+        voiceSelect.innerHTML = '<option>Keine deutschen Stimmen gefunden</option>';
+        speakButton.disabled = true;
+        return;
+    }
+    germanVoices.forEach((voice, i) => {
+        const option = document.createElement('option');
+        option.value = voice.name;
+        option.textContent = `${voice.name} (${voice.lang})${voice.localService ? ' [Lokal]' : ''}${voice.gender ? ' ['+voice.gender+']' : ''}`;
+        voiceSelect.appendChild(option);
+    });
+    speakButton.disabled = false;
+}
+
+// Stimmen laden (auch bei Änderungen)
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = populateVoiceList;
+    populateVoiceList();
+} else {
+    voiceSelect.innerHTML = '<option>Sprachsynthese nicht unterstützt</option>';
+    speakButton.disabled = true;
+}
+
+// Frage speichern, wenn sie angezeigt wird
+function updateCurrentQuestion() {
+    currentQuestion = questionDisplay.textContent;
+}
+
 // Event Listener für den Klick auf das Bild
 questionImage.addEventListener('click', () => {
     // Animation für das Bild
@@ -64,4 +103,21 @@ questionImage.addEventListener('click', () => {
     // Neue Frage anzeigen
     const newQuestion = getRandomQuestion();
     questionDisplay.innerHTML = `<p>${newQuestion}</p>`;
-}); 
+    updateCurrentQuestion();
+});
+
+// Vorlesen-Button
+speakButton.addEventListener('click', () => {
+    if (!('speechSynthesis' in window)) return;
+    const utter = new SpeechSynthesisUtterance(currentQuestion);
+    const selectedVoice = voices.find(v => v.name === voiceSelect.value);
+    if (selectedVoice) utter.voice = selectedVoice;
+    utter.lang = selectedVoice ? selectedVoice.lang : 'de-DE';
+    utter.rate = 1;
+    utter.pitch = 1;
+    window.speechSynthesis.cancel(); // Stoppe vorherige Sprache
+    window.speechSynthesis.speak(utter);
+});
+
+// Wenn die Frage initial angezeigt wird, speichern
+updateCurrentQuestion(); 
