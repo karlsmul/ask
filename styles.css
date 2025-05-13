@@ -98,18 +98,40 @@ h1 {
 }
 
 @media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
     .container {
-        padding: 1rem;
-        max-width: 98vw;
+        padding: 0.5rem 0.2rem;
+        max-width: 100vw;
+        margin: 0.5rem 0;
+        border-radius: 0;
     }
     h1 {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        padding: 0 0.5rem;
+    }
+    .image-container {
+        margin: 1.2rem 0 1rem 0;
     }
     .clickable-image {
-        width: 120px;
-        height: 120px;
+        width: 90vw;
+        max-width: 180px;
+        height: auto;
+        min-width: 100px;
+        min-height: 100px;
+        border-radius: 30px;
     }
     .question-display {
-        padding: 1rem 0.5rem;
+        padding: 0.7rem 0.2rem;
+        margin-top: 1.2rem;
+        min-height: 60px;
+        border-radius: 0.5em;
+    }
+    .question-display p {
+        font-size: 1.05rem;
+        padding: 0.3rem 0.2rem;
+        border-radius: 0.5em;
     }
 } 
