@@ -13,11 +13,12 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 32px;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    border: none;
     padding: 2.5rem 2rem;
     max-width: 420px;
     width: 95%;
@@ -30,31 +31,34 @@ h1 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2.2rem;
-    background: linear-gradient(90deg, #1de9b6, #4e2a8e, #6a82fb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 0 #222;
     letter-spacing: 1px;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    text-fill-color: initial;
 }
 
 .image-container {
     margin: 2.5rem 0 2rem 0;
     display: flex;
     justify-content: center;
-    /* Hintergrund und Schatten entfernt */
     background: none;
     box-shadow: none;
+    border: none;
 }
 
 .clickable-image {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    box-shadow: 0 0 32px 0 rgba(29, 233, 182, 0.25), 0 4px 24px 0 rgba(78, 42, 142, 0.15);
-    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: none;
+    transition: transform 0.25s;
     cursor: pointer;
     background: transparent;
+    border: none;
 }
 
 .clickable-image:hover {
@@ -63,10 +67,10 @@ h1 {
 }
 
 .question-display {
-    /* Hintergrund, Schatten und Rahmen entfernt */
     background: none;
     box-shadow: none;
     border-radius: 0;
+    border: none;
     padding: 1.7rem 1.2rem;
     margin-top: 2.2rem;
     min-height: 110px;
@@ -77,16 +81,20 @@ h1 {
 }
 
 .question-display p {
-    font-size: 1.22rem;
-    font-weight: 500;
-    background: linear-gradient(90deg, #4e2a8e, #1de9b6, #6a82fb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 0 #222;
     text-align: center;
     line-height: 1.6;
     letter-spacing: 0.5px;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    text-fill-color: initial;
+    padding: 0.5rem 1rem;
+    border-radius: 0.7em;
 }
 
 @media (max-width: 600px) {
