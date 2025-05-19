@@ -47,10 +47,18 @@ const questions = [
 const questionImage = document.getElementById('questionImage');
 const questionDisplay = document.getElementById('questionDisplay');
 
+// Variable für die letzte Frage
+let lastQuestion = null;
+
 // Funktion zum Auswählen einer zufälligen Frage
 function getRandomQuestion() {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    return questions[randomIndex];
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * questions.length);
+    } while (questions[randomIndex] === lastQuestion && questions.length > 1);
+    
+    lastQuestion = questions[randomIndex];
+    return lastQuestion;
 }
 
 // Event Listener für den Klick auf das Bild
